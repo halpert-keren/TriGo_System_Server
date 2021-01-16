@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const consts = require('./constants');
-const { DB_HOST, DB_USER, DB_PASS } = consts;
+const { DB_HOST, DB_USER, DB_PASS } = require('./constants');
 const options = {
     useNewUrlParser: true,     // For deprecation warnings
     useCreateIndex: true,      // For deprecation warnings
