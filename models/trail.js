@@ -8,7 +8,7 @@ const trailSchema = new Schema({
     location: { type: Array, required: true },
     accessibility: { type: Array },
     timeOfDay: { type: String },
-    picnicArea: { type: Boolean },
+    picnicArea: { type: Boolean, default: false },
     lengthOfTime: { type: String },
     equipment: { type: Array },
     description: { type: String }
