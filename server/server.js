@@ -3,7 +3,7 @@ const logger = require("morgan");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// const someRouter = require("./routers/some.router");
+const userRouter = require("../routes/user.router");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 
 app.use(logger("dev"));
 
-// app.use('/api/somes', someRouter.router);
+app.use('/api/users', userRouter.router);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
