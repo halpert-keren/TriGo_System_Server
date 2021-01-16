@@ -9,7 +9,7 @@ const groupSchema = new Schema({
     time: { type: String },
     privacy: { type: Boolean, default: false },
     description: { type: String },
-    users: [ Object ]
+    users: {type: Array}
 }, { collection: 'groups' });
 
 const Group = model('Group', groupSchema);

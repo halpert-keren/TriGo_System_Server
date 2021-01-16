@@ -4,6 +4,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const userRouter = require("../routes/user.router");
+const trailRouter = require("../routes/trail.router");
+const groupRouter = require("../routes/group.router");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,6 +21,8 @@ app.use((req, res, next) => {
 app.use(logger("dev"));
 
 app.use('/api/users', userRouter.router);
+app.use('/api/trails', trailRouter.router);
+app.use('/api/groups', groupRouter.router);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
