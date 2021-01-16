@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 getUsers = (req, res) => {
     User.find({})
@@ -13,13 +15,14 @@ getUser = (req, res) => {
 }
 
 createUser = (req, res) => {
-    const { body } = req
+    const {body} = req
+    const hashedPassword = bcrypt.hashSync(body.password, saltRounds);
+
     const user = new User();
     user.firstName = body.firstName
     user.lastName = body.lastName
     user.email = body.email
-    // user.password = encondePass(body.password)          // write a password encoder function
-    user.password = body.password
+    user.password = hashedPassword
     user.savedTrails = []
     user.groups = []
 
@@ -30,22 +33,23 @@ createUser = (req, res) => {
 
 updateUser = (req, res) => {
     const { body } = req
-    const user = {
-        firstName: body.firstName,
-        lastName: body.lastName,
-        email: body.email,
-        // password: encondePass(body.password),
-
-    };
-
-    User.updateOne({ _id: req.params.id }, user)    // updateOne docs = PUSH!!
-        .then(() => res.json({_id: `${req.params.id}`}))
-        .catch(err => console.log(err))
+    if (body.savedTrails != null) {
+        const itemToAdd = body.savedTrails[0]
+        User.updateOne({_id: req.params.id}, {$push: {savedTrails: itemToAdd}})
+            .then(() => res.json({id: `${req.params.id}`}))
+            .catch(err => console.log(err))
+    }
+    else if (body.groups != null) {
+        const itemToAdd = body.groups[0]
+        User.updateOne({_id: req.params.id}, {$push: {groups: itemToAdd}})
+            .then(() => res.json({id: `${req.params.id}`}))
+            .catch(err => console.log(err))
+    }
 }
 
 deleteUser = (req, res) => {
     User.deleteOne({_id: req.params.id})
-        .then(() => res.json({ success: true }))
+        .then(() => res.json({success: true}))
         .catch(err => console.log(err))
 }
 
