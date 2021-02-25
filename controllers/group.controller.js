@@ -19,7 +19,7 @@ createGroup = (req, res) => {
     group.trail = body.trail
     group.date = body.date
     group.time = body.time
-    group.privacy = body.privacy
+    group.privacy = body.privacy === 'Yes';
     group.description = body.description
     group.users = body.users
 
