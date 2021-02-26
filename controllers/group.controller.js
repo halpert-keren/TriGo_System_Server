@@ -32,8 +32,8 @@ createGroup = (req, res) => {
 updateGroup = (req, res) => {
     const { body } = req
     const group = {
-        name: body.trailName,
-        trail: body.length,
+        name: body.name,
+        trail: body.trail,
         date: body.date,
         time: body.time,
         privacy: body.privacy,

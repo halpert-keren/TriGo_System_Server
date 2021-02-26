@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const trailSchema = new Schema({
-    trailName: { type: String, required: true},
+    name: { type: String, required: true},
     length: { type: Number, required: true },
     difficulty: { type: String, required: true },
     area: { type: Array, required: true },

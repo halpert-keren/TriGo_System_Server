@@ -35,7 +35,7 @@ createTrail = (req, res) => {
 updateTrail = (req, res) => {
     const { body } = req
     const trail = {
-        trailName: body.trailName,
+        name: body.name,
         length: body.length,
         difficulty: body.difficulty,
         area: body.area,
