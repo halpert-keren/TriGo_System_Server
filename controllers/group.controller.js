@@ -1,6 +1,12 @@
 const Group = require('../models/group');
 
 getGroups = (req, res) => {
+    if(req.query.userID){
+        Group.find({users:req.query.userID})
+            .then(docs => res.json(docs))
+            .catch(err => console.log(err))
+    }
+
     const filters = {}
     if (req.query.date)
         filters.date = req.query.date
