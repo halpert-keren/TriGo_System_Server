@@ -1,6 +1,5 @@
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const Session = require('../models/session');
 
 getUsers = (req, res) => {
     User.find({})
@@ -14,20 +13,28 @@ getUser = (req, res) => {
         .catch(err => console.log(err))
 }
 
-createUser = (req, res) => {
-    const {body} = req
-    const hashedPassword = bcrypt.hashSync(body.password, saltRounds);
-
+createUser = (token, req, res) => {
     const user = new User();
-    user.firstName = body.firstName
-    user.lastName = body.lastName
-    user.email = body.email
-    user.password = hashedPassword
+
+    user.googleID = token['id']
+    user.firstName = token['f_name']
+    user.lastName = token['l_name']
+    user.email = token['email']
+    user.avatar = token['avatar']
     user.savedTrails = []
-    user.groups = []
 
     user.save()
-        .then(() => res.json({_id: `${user._id}`}))
+        .then(() => {
+            const session = new Session()
+            session.id = user.googleID
+            session.save()
+                .then(() => {
+                    User.findOne({googleID: token['id']})
+                        .then(docs => res.json(docs))
+                        .catch(err => console.log(err))
+                })
+                .catch(err => console.log(err))
+        })
         .catch(err => console.log(err))
 }
 
