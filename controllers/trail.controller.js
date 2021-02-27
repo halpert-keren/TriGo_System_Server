@@ -1,7 +1,23 @@
 const Trail = require('../models/trail');
 
 getTrails = (req, res) => {
-    Trail.find({})
+    const filters = {}
+    if (req.query.length)
+        filters.length = {$in: req.query.length}
+    if (req.query.difficulty)
+        filters.difficulty = {$in: req.query.difficulty}
+    if (req.query.area)
+        filters.area = {$in: req.query.area}
+    if (req.query.accessibility)
+        filters.accessibility = {$in: req.query.accessibility}
+    if (req.query.timeOfDay)
+        filters.timeOfDay = {$in: req.query.timeOfDay}
+    if (req.query.picnicArea)
+        filters.picnicArea = {$in: req.query.picnicArea}
+    if (req.query.lengthOfTime)
+        filters.lengthOfTime = {$in: req.query.lengthOfTime}
+
+    Trail.find(filters)
         .then(docs => res.json(docs))
         .catch(err => console.log(err))
 }
@@ -13,9 +29,9 @@ getTrail = (req, res) => {
 }
 
 createTrail = (req, res) => {
-    const { body } = req
+    const {body} = req
     const trail = new Trail();
-    trail.trailName = body.trailName
+    trail.name = body.name
     trail.length = body.length
     trail.difficulty = body.difficulty
     trail.area = body.area
@@ -33,7 +49,7 @@ createTrail = (req, res) => {
 }
 
 updateTrail = (req, res) => {
-    const { body } = req
+    const {body} = req
     const trail = {
         name: body.name,
         length: body.length,
@@ -48,14 +64,14 @@ updateTrail = (req, res) => {
         description: body.description
     };
 
-    Trail.updateOne({ _id: req.params.id }, trail)    // updateOne docs = PUSH!!
+    Trail.updateOne({_id: req.params.id}, trail)    // updateOne docs = PUSH!!
         .then(() => res.json({_id: `${req.params.id}`}))
         .catch(err => console.log(err))
 }
 
 deleteTrail = (req, res) => {
     Trail.deleteOne({_id: req.params.id})
-        .then(() => res.json({ success: true }))
+        .then(() => res.json({success: true}))
         .catch(err => console.log(err))
 }
 
