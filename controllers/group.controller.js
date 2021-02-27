@@ -1,6 +1,11 @@
 const Group = require('../models/group');
 
 getGroups = (req, res) => {
+    if(req.query.userID){
+        Group.find({users:req.query.userID})
+            .then(docs => res.json(docs))
+            .catch(err => console.log(err))
+    }
     Group.find({})
         .then(docs => res.json(docs))
         .catch(err => console.log(err))
