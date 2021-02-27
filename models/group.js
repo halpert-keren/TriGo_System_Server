@@ -1,6 +1,4 @@
 const { Schema, model } = require('mongoose');
-const {Trail} = require('./trail')
-const {User} = require('./user')
 
 const groupSchema = new Schema({
     name: { type: String, required: true },
