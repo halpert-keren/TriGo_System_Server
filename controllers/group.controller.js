@@ -1,7 +1,27 @@
 const Group = require('../models/group');
 
 getGroups = (req, res) => {
-    Group.find({})
+    const filters = {}
+    if (req.query.date)
+        filters.date = req.query.date
+    if (req.query.time)
+        filters.time = req.query.time
+    if (req.query.length)
+        filters.length = {$in: req.query.length}
+    if (req.query.difficulty)
+        filters.difficulty = {$in: req.query.difficulty}
+    if (req.query.area)
+        filters.area = {$in: req.query.area}
+    if (req.query.accessibility)
+        filters.accessibility = {$in: req.query.accessibility}
+    if (req.query.timeOfDay)
+        filters.timeOfDay = {$in: req.query.timeOfDay}
+    if (req.query.picnicArea)
+        filters.picnicArea = {$in: req.query.picnicArea}
+    if (req.query.lengthOfTime)
+        filters.lengthOfTime = {$in: req.query.lengthOfTime}
+
+    Group.find(filters)
         .then(docs => res.json(docs))
         .catch(err => console.log(err))
 }
@@ -19,7 +39,7 @@ createGroup = (req, res) => {
     group.trail = body.trail
     group.date = body.date
     group.time = body.time
-    group.privacy = body.privacy === 'Yes';
+    group.privacy = body.privacy === 'Yes'
     group.description = body.description
     group.users = body.users
 
