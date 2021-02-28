@@ -58,16 +58,10 @@ createGroup = (req, res) => {
 updateGroup = (req, res) => {
     const { body } = req
     const group = {
-        name: body.name,
-        trail: body.trail,
-        date: body.date,
-        time: body.time,
-        privacy: body.privacy,
-        description: body.description,
         $push: {users: body.users}
     };
 
-    Group.updateOne({ _id: req.params.id }, group)    // updateOne docs = PUSH!!
+    Group.updateOne({ _id: req.params.id }, group)
         .then(() => res.json({_id: `${req.params.id}`}))
         .catch(err => console.log(err))
 }
