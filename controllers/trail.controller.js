@@ -30,6 +30,7 @@ getTrail = (req, res) => {
 
 createTrail = (req, res) => {
     const {body} = req
+    console.log(body)
     const trail = new Trail();
     trail.name = body.name
     trail.length = body.length
@@ -42,6 +43,7 @@ createTrail = (req, res) => {
     trail.lengthOfTime = body.lengthOfTime
     trail.equipment = body.equipment
     trail.description = body.description
+    trail.images = body.images
 
     trail.save()
         .then(() => res.json({_id: `${trail._id}`}))
@@ -61,7 +63,8 @@ updateTrail = (req, res) => {
         picnicArea: body.picnicArea,
         lengthOfTime: body.lengthOfTime,
         equipment: body.equipment,
-        description: body.description
+        description: body.description,
+        images: body.images
     };
 
     Trail.updateOne({_id: req.params.id}, trail)    // updateOne docs = PUSH!!
