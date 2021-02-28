@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const groupSchema = new Schema({
     name: { type: String, required: true },
-    trail: { type: Object, required: true },
+    trail: { type: String, required: true },
     date: { type: String },
     time: { type: String },
     privacy: { type: Boolean, default: false },
