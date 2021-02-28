@@ -2,6 +2,11 @@ const User = require('../models/user');
 const Session = require('../models/session');
 
 getUsers = (req, res) => {
+    if(req.query.email){
+        User.find({email: req.query.email}).limit(1)
+            .then(docs => res.json(docs))
+            .catch(err => console.log(err))
+    }
     User.find({})
         .then(docs => res.json(docs))
         .catch(err => console.log(err))

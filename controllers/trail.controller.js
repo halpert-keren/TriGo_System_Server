@@ -52,6 +52,12 @@ createTrail = (req, res) => {
 
 updateTrail = (req, res) => {
     const {body} = req
+    let imgs = []
+    if(body.images)
+        imgs = body.images
+    else
+        imgs = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFKAAyXvdutf0kjEwsxWNT5xfVd2U3OdNm3g&usqp=CAU']
+
     const trail = {
         name: body.name,
         length: body.length,
@@ -64,10 +70,10 @@ updateTrail = (req, res) => {
         lengthOfTime: body.lengthOfTime,
         equipment: body.equipment,
         description: body.description,
-        images: body.images
+        images: imgs
     };
 
-    Trail.updateOne({_id: req.params.id}, trail)    // updateOne docs = PUSH!!
+    Trail.updateOne({_id: req.params.id}, trail)
         .then(() => res.json({_id: `${req.params.id}`}))
         .catch(err => console.log(err))
 }
