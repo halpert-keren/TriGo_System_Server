@@ -20,6 +20,10 @@ app.use('/api/trails', trailRouter.router);
 app.use('/api/groups', groupRouter.router);
 app.use('/api/requests', requestRouter.router);
 
+app.use('/favicon.ico', ((req, res) => {
+    res.sendStatus(200)
+}));
+
 app.use((req, res) => {
     res.status(500).send('Something is broken!');
 });
