@@ -21,6 +21,7 @@ app.use('/api/groups', groupRouter.router);
 app.use('/api/requests', requestRouter.router);
 
 app.use('/favicon.ico', ((req, res) => {
+
     res.sendStatus(200)
 }));
 
