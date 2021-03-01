@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const logger = require("morgan");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -12,6 +13,7 @@ const requestRouter = require("./routers/request.router");
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({origin: true, credentials: true}));
+app.use(logger("dev"));
 
 app.use('/auth', authRouter.router);
 
