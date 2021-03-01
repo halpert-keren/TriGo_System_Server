@@ -2,7 +2,7 @@ const Request = require('../models/request');
 const Group = require('../models/group');
 
 getRequests = (req, res) => {
-    if(req.query.email){
+    if (req.query.email) {
         Request.find({
             $or: [{ownerID: req.query.email}, {requesterID: req.query.email}]
         })
@@ -41,12 +41,10 @@ createRequest = (req, res) => {
 
 
 updateRequest = (req, res) => {
-    const { body } = req
-    const request = {
-        status : body.status
-    };
+    const {body} = req
+    const request = {status: body.status}
 
-    Request.updateOne({ _id: req.params.id }, request)
+    Request.updateOne({_id: req.params.id}, request)
         .then(() => res.json({_id: `${req.params.id}`}))
         .catch(err => console.log(err))
 }

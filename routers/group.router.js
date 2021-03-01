@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const router = new Router();
 
 const groupController = require('../controllers/group.controller');
@@ -9,4 +9,4 @@ router.post('/', groupController.createGroup);
 router.put('/:id', groupController.updateGroup);
 router.delete('/:id', groupController.deleteGroup);
 
-module.exports = { router };
+module.exports = {router};
