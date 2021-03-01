@@ -2,9 +2,9 @@ const Request = require('../models/request');
 const Group = require('../models/group');
 
 getRequests = (req, res) => {
-    if(req.query.userID){
+    if(req.query.email){
         Request.find({
-            $or: [{ownerID: req.query.userID}, {requesterID: req.query.userID}]
+            $or: [{ownerID: req.query.email}, {requesterID: req.query.email}]
         })
             .then(docs => res.json(docs))
             .catch(err => console.log(err))

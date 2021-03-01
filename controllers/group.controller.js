@@ -2,7 +2,7 @@ const Group = require('../models/group');
 
 getGroups = (req, res) => {
     if(req.query.email){
-        Group.find({users:req.query.email})
+        Group.find({users: {$all: [req.query.email]}})
             .then(docs => res.json(docs))
             .catch(err => console.log(err))
     }
