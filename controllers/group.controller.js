@@ -1,7 +1,7 @@
 const Group = require('../models/group');
 
 getGroups = (req, res) => {
-    if(req.query.email){
+    if (req.query.email) {
         Group.find({users: {$all: [req.query.email]}})
             .then(docs => res.json(docs))
             .catch(err => console.log(err))
@@ -39,7 +39,7 @@ getGroup = (req, res) => {
 }
 
 createGroup = (req, res) => {
-    const { body } = req
+    const {body} = req
     const group = new Group();
     group.name = body.name
     group.trail = body.trail
@@ -49,26 +49,23 @@ createGroup = (req, res) => {
     group.description = body.description
     group.users = body.users
 
-
     group.save()
         .then(() => res.json({_id: `${group._id}`}))
         .catch(err => console.log(err))
 }
 
 updateGroup = (req, res) => {
-    const { body } = req
-    const group = {
-        $push: {users: body.users}
-    };
+    const {body} = req
+    const group = {$push: {users: body.users}}
 
-    Group.updateOne({ _id: req.params.id }, group)
+    Group.updateOne({_id: req.params.id}, group)
         .then(() => res.json({_id: `${req.params.id}`}))
         .catch(err => console.log(err))
 }
 
 deleteGroup = (req, res) => {
     Group.deleteOne({_id: req.params.id})
-        .then(() => res.json({ success: true }))
+        .then(() => res.json({success: true}))
         .catch(err => console.log(err))
 }
 

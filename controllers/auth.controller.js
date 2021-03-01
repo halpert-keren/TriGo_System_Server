@@ -46,5 +46,5 @@ login = async (req, res) => {
 
 module.exports = {
     logout,
-    login,
+    login
 }

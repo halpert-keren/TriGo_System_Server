@@ -2,7 +2,7 @@ const User = require('../models/user');
 const Session = require('../models/session');
 
 getUsers = (req, res) => {
-    if(req.query.email){
+    if (req.query.email) {
         User.find({email: req.query.email}).limit(1)
             .then(docs => res.json(docs))
             .catch(err => console.log(err))
@@ -44,9 +44,8 @@ createUser = (token, req, res) => {
 }
 
 updateUser = (req, res) => {
-    const { body } = req
-    if(body.action)
-    {
+    const {body} = req
+    if (body.action) {
         if (body.savedTrails != null) {
             const itemToAdd = body.savedTrails[0]
             User.updateOne({googleID: req.params.id}, {$push: {savedTrails: itemToAdd}})
@@ -57,8 +56,7 @@ updateUser = (req, res) => {
                 })
                 .catch(err => console.log(err))
         }
-    }
-    else{
+    } else {
         if (body.savedTrails != null) {
             const itemToDelete = body.savedTrails[0]
             User.updateOne({googleID: req.params.id}, {$pull: {savedTrails: itemToDelete}})
@@ -70,12 +68,6 @@ updateUser = (req, res) => {
                 .catch(err => console.log(err))
         }
     }
-    // else if (body.groups != null) {
-    //     const itemToAdd = body.groups[0]
-    //     User.updateOne({_id: req.params.id}, {$push: {groups: itemToAdd}})
-    //         .then(() => res.json({id: `${req.params.id}`}))
-    //         .catch(err => console.log(err))
-    // }
 }
 
 deleteUser = (req, res) => {

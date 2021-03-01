@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const router = new Router();
 
 const requestController = require('../controllers/request.controller');
@@ -9,4 +9,4 @@ router.post('/', requestController.createRequest);
 router.put('/:id', requestController.updateRequest);
 router.delete('/:id', requestController.deleteRequest);
 
-module.exports = { router };
+module.exports = {router};

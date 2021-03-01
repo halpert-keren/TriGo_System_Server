@@ -53,7 +53,7 @@ createTrail = (req, res) => {
 updateTrail = (req, res) => {
     const {body} = req
     let imgs = []
-    if(body.images)
+    if (body.images)
         imgs = body.images
     else
         imgs = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFKAAyXvdutf0kjEwsxWNT5xfVd2U3OdNm3g&usqp=CAU']
@@ -71,7 +71,7 @@ updateTrail = (req, res) => {
         equipment: body.equipment,
         description: body.description,
         images: imgs
-    };
+    }
 
     Trail.updateOne({_id: req.params.id}, trail)
         .then(() => res.json({_id: `${req.params.id}`}))
