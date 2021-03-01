@@ -3,11 +3,11 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const authRouter = require("../routers/auth.router");
-const userRouter = require("../routers/user.router");
-const trailRouter = require("../routers/trail.router");
-const groupRouter = require("../routers/group.router");
-const requestRouter = require("../routers/request.router");
+const authRouter = require("./routers/auth.router");
+const userRouter = require("./routers/user.router");
+const trailRouter = require("./routers/trail.router");
+const groupRouter = require("./routers/group.router");
+const requestRouter = require("./routers/request.router");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

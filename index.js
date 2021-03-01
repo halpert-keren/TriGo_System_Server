@@ -1,3 +1,3 @@
 require('dotenv').config();
-require('./server/db_connection');
-require('./server/server');
+require('./db_connection');
+require('./server');
